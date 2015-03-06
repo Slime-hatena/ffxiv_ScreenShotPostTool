@@ -254,28 +254,28 @@ public class Frame {
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StatusUpdate statusUpdate = new StatusUpdate(textField_1.getText());
-				
+
 				ImageIcon postimg = new ImageIcon(FileCheck.selectedImg().getPath());
 				Image instImg = postimg.getImage();
-				BufferedImage resizeImg =new BufferedImage(instImg.getWidth(null),instImg.getHeight(null),BufferedImage.TYPE_INT_ARGB);   
-				BufferedImage thmb = Scalr.resize(new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB), Scalr.Method.ULTRA_QUALITY,
+				BufferedImage resizeImg =new BufferedImage(instImg.getWidth(null),instImg.getHeight(null),BufferedImage.TYPE_INT_RGB);
+				BufferedImage thmb = Scalr.resize(resizeImg, Scalr.Method.ULTRA_QUALITY,
 									Scalr.Mode.FIT_EXACT, 1920, 1080, Scalr.OP_ANTIALIAS);
-				Graphics g = resizeImg.getGraphics();
-				g.drawImage(instImg,0,0,null);  
+				Graphics g = thmb.getGraphics();
+				g.drawImage(instImg,0,0,null);
 
 				File resizedImg;
 				try {
 					resizedImg = File.createTempFile("temp",".png");
 					ImageIO.write(thmb, "PNG",resizedImg);
-					
+
 					statusUpdate.setMedia(resizedImg);
 				} catch (IOException e2) {
 					// TODO 自動生成された catch ブロック
 					e2.printStackTrace();
 				}
-				
 
-				
+
+
 				try {
 					Status status = twitter.updateStatus(statusUpdate);
 				} catch (TwitterException e1) {

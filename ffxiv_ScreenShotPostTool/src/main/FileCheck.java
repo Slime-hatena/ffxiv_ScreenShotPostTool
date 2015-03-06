@@ -134,7 +134,7 @@ public class FileCheck {
 			}
 		});
 
-		return files[lastImg];
+		return files[lastImg - 1];
 
 	}
 }
