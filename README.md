@@ -1,0 +1,2 @@
+# ffxiv_ScreenShotPostTool
+FF14のスクリーンショットを気軽に投稿するためのツールです。作成中。
