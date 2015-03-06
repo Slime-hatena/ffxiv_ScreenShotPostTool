@@ -116,13 +116,25 @@ public class FileCheck {
 		return new ImageIcon(nextFile().getPath());
 
 	}
-	
-	public static File selectedImg(){
-		
-		
-		
-		
-		return null;
-		
+
+	/*
+	 * 選択中のファイルを取得
+	 */
+	public static File selectedImg() {
+
+		File[] files = dir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				String name = pathname.getName();
+				if (name.endsWith(".png") || name.endsWith(".jpg")) {
+					filename = name;
+					return true;
+				}
+				return false;
+			}
+		});
+
+		return files[lastImg];
+
 	}
 }

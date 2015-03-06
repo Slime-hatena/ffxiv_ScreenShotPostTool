@@ -3,3 +3,6 @@
 *.class
 *.jar
 *rib*
+*.ini
+*.gitignore
+*.properties

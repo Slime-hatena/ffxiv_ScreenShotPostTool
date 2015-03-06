@@ -7,5 +7,8 @@
 	<classpathentry kind="lib" path="C:/pleiades-e4.4-java-jre_20130625/workspace/ffxiv_ScreenShotPostTool/rib/twitter4j-4.0.2/lib/twitter4j-examples-4.0.2.jar"/>
 	<classpathentry kind="lib" path="C:/pleiades-e4.4-java-jre_20130625/workspace/ffxiv_ScreenShotPostTool/rib/twitter4j-4.0.2/lib/twitter4j-media-support-4.0.2.jar"/>
 	<classpathentry kind="lib" path="C:/pleiades-e4.4-java-jre_20130625/workspace/ffxiv_ScreenShotPostTool/rib/twitter4j-4.0.2/lib/twitter4j-stream-4.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Slime_hatena/git/ffxiv_ScreenShotPostTool/ffxiv_ScreenShotPostTool/rib/imgscalr-lib-4.2/imgscalr-lib-4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Slime_hatena/git/ffxiv_ScreenShotPostTool/ffxiv_ScreenShotPostTool/rib/imgscalr-lib-4.2/imgscalr-lib-4.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Slime_hatena/git/ffxiv_ScreenShotPostTool/ffxiv_ScreenShotPostTool/rib/imgscalr-lib-4.2/imgscalr-lib-4.2-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

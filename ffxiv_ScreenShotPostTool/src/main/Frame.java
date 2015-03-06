@@ -1,9 +1,11 @@
 package main;
 
 import java.awt.Desktop;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +13,15 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import org.imgscalr.Scalr;
 
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
@@ -131,9 +136,7 @@ public class Frame {
 
 				twitter = TwitterFactory.getSingleton();
 				// Twitterオブジェクト作成
-				twitter.setOAuthConsumer("lMOyTW8mTL346hWRbMys9Zc5L",
-						"LGahoUGT12q0orJLWd3zlSwhPOmygAfAw4MqGQYPQDK14polzP");
-				// consumer key,consumer secret をセットする
+
 
 				try {
 					requestToken = twitter.getOAuthRequestToken();
@@ -251,9 +254,28 @@ public class Frame {
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StatusUpdate statusUpdate = new StatusUpdate(textField_1.getText());
-				String postimg = (FileCheck.dir + FileCheck.filename);
-				String test = postimg;
-				statusUpdate.setMedia(postimg);
+				
+				ImageIcon postimg = new ImageIcon(FileCheck.selectedImg().getPath());
+				Image instImg = postimg.getImage();
+				BufferedImage resizeImg =new BufferedImage(instImg.getWidth(null),instImg.getHeight(null),BufferedImage.TYPE_INT_ARGB);   
+				BufferedImage thmb = Scalr.resize(new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB), Scalr.Method.ULTRA_QUALITY,
+									Scalr.Mode.FIT_EXACT, 1920, 1080, Scalr.OP_ANTIALIAS);
+				Graphics g = resizeImg.getGraphics();
+				g.drawImage(instImg,0,0,null);  
+
+				File resizedImg;
+				try {
+					resizedImg = File.createTempFile("temp",".png");
+					ImageIO.write(thmb, "PNG",resizedImg);
+					
+					statusUpdate.setMedia(resizedImg);
+				} catch (IOException e2) {
+					// TODO 自動生成された catch ブロック
+					e2.printStackTrace();
+				}
+				
+
+				
 				try {
 					Status status = twitter.updateStatus(statusUpdate);
 				} catch (TwitterException e1) {
