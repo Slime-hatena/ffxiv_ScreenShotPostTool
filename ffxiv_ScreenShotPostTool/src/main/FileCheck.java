@@ -24,7 +24,7 @@ public class FileCheck {
 	}
 
 	static {
-		dir = new File("C:\\_testdir");
+		dir = new File(Config.getPath());
 	}
 
 	public static void setDir(File path) {
@@ -76,12 +76,12 @@ public class FileCheck {
 				return false;
 			}
 		});
-		if (lastImg >= files.length) {
-			lastImg = 0;
+		if (lastImg >= files.length - 1) {
+			lastImg = -1;
 		}
 		Arrays.sort(files, Collections.reverseOrder());
 
-		return files[lastImg++];
+		return files[++lastImg];
 	}
 
 	public static ImageIcon prevImageIcon() {
@@ -134,7 +134,8 @@ public class FileCheck {
 			}
 		});
 
-		return files[lastImg - 1];
+		Arrays.sort(files, Collections.reverseOrder());
+		return files[lastImg];
 
 	}
 }

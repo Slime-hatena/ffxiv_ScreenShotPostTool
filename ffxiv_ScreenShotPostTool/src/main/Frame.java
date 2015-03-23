@@ -21,8 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.imgscalr.Scalr;
-
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
@@ -44,6 +42,8 @@ public class Frame {
 
 	public Frame() {
 
+
+
 		JFrame frame = new JFrame("FFXIV ScreenShotPostTool");
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,10 +53,7 @@ public class Frame {
 
 		JLabel imgPrev = new JLabel();
 		imgPrev.setBounds(314, 109, 355, 220);
-		ImageIcon img = new ImageIcon("C:\\_testdir\\ffxiv_20150228_234356.png");
 
-		imgPrev.setIcon(new ImageIcon(img.getImage().getScaledInstance(
-				imgPrev.getWidth(), imgPrev.getHeight(), Image.SCALE_SMOOTH)));
 		frame.getContentPane().add(imgPrev);
 
 		JTextArea txtrCusersdocumentsmy = new JTextArea();
@@ -64,7 +61,7 @@ public class Frame {
 		txtrCusersdocumentsmy.setEnabled(false);
 		txtrCusersdocumentsmy.setBounds(125, 33, 544, 56);
 		txtrCusersdocumentsmy
-				.setText("C:\\Users\\ [ユーザー名] \\Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn\\screenshots");
+				.setText((FileCheck.getPath()));
 		frame.getContentPane().add(txtrCusersdocumentsmy);
 		txtrCusersdocumentsmy.setLineWrap(true);
 
@@ -74,7 +71,7 @@ public class Frame {
 
 		txtffxivff = new JTextField();
 		txtffxivff.setBounds(22, 234, 280, 19);
-		txtffxivff.setText("#FFXIV #FF14");
+		txtffxivff.setText("#FF14 #FFXIV");
 		frame.getContentPane().add(txtffxivff);
 		txtffxivff.setColumns(10);
 
@@ -187,32 +184,19 @@ public class Frame {
 
 				// PINの読み込み
 				try {
-					accessToken = twitter
-							.getOAuthAccessToken(requestToken, pin);
-				} catch (TwitterException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-				}
-				// AccessTokenをセット
+					accessToken = twitter.getOAuthAccessToken(requestToken, pin);
 
-				try {
 					user = twitter.verifyCredentials();
-				} catch (TwitterException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-				}
 
-				try {
-					accessToken = twitter
-							.getOAuthAccessToken(requestToken, pin);
-				} catch (TwitterException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-				}
-				// AccessTokenをセット
+					accessToken = twitter.getOAuthAccessToken(requestToken, pin);
+					Config.setAccessToken(accessToken.getToken());
 
-				try {
 					user = twitter.verifyCredentials();
+
+					Config.setAccessToken(accessToken.getToken());
+					Config.setTokenSecret(accessToken.getTokenSecret());
+					Config.save();
+
 				} catch (TwitterException e1) {
 					// TODO 自動生成された catch ブロック
 					e1.printStackTrace();
@@ -257,16 +241,14 @@ public class Frame {
 
 				ImageIcon postimg = new ImageIcon(FileCheck.selectedImg().getPath());
 				Image instImg = postimg.getImage();
-				BufferedImage resizeImg =new BufferedImage(instImg.getWidth(null),instImg.getHeight(null),BufferedImage.TYPE_INT_RGB);
-				BufferedImage thmb = Scalr.resize(resizeImg, Scalr.Method.ULTRA_QUALITY,
-									Scalr.Mode.FIT_EXACT, 1920, 1080, Scalr.OP_ANTIALIAS);
+				BufferedImage thmb =new BufferedImage(instImg.getWidth(null),instImg.getHeight(null),BufferedImage.TYPE_INT_RGB);
 				Graphics g = thmb.getGraphics();
 				g.drawImage(instImg,0,0,null);
 
 				File resizedImg;
 				try {
-					resizedImg = File.createTempFile("temp",".png");
-					ImageIO.write(thmb, "PNG",resizedImg);
+					resizedImg = File.createTempFile("temp",".jpg");
+					ImageIO.write(thmb, "JPG",resizedImg);
 
 					statusUpdate.setMedia(resizedImg);
 				} catch (IOException e2) {
