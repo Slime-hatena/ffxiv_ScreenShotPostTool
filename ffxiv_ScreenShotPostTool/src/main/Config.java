@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+
 public class Config {
 
 	private static HashMap<String, String> conf = new HashMap<>();
@@ -35,6 +38,8 @@ public class Config {
 				String key = s.split("=")[0];
 				String val = s.split("=")[1];
 				conf.put(key, val);
+
+				System.out.println("[DEBUG] " + key + "=" + val);
 
 			}
 
@@ -105,6 +110,17 @@ public class Config {
 	public static void setTokenSecret(String Secret) {
 
 		conf.put(KEY_TOKENSECRET, Secret);
+	}
+
+	public static void accsesTokenLoad() {
+
+		TwitterFactory factory = new TwitterFactory();
+		AccessToken token = new AccessToken(getAccessToken(), getTokenSecret());
+		Frame.twitter = factory.getInstance();
+		Frame.twitter.setOAuthAccessToken(token);
+
+		System.out.println(token);
+
 	}
 
 }

@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 public class FileCheck {
 
-	static int lastImg = 0;
+	public static int lastImg = 0;
 	static File dir;
 	static String filename;
 
@@ -136,6 +136,24 @@ public class FileCheck {
 
 		Arrays.sort(files, Collections.reverseOrder());
 		return files[lastImg];
+
+	}
+
+	public static int getLength() {
+		File[] files = dir.listFiles(new FileFilter() {
+
+			@Override
+			public boolean accept(File pathname) {
+				String name = pathname.getName();
+				if (name.endsWith(".png") || name.endsWith(".jpg")) {
+					filename = name;
+					return true;
+				}
+
+				return false;
+			}
+		});
+		return files.length;
 
 	}
 }
