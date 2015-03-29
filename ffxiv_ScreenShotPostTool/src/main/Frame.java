@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -38,6 +39,7 @@ public class Frame {
 	private JTextArea bodyTextArea;
 	private JLabel maxCounts;
 	private JLabel presentCounts;
+	private JLabel tweetStatsLabel;
 	static JLabel lblaccountName;
 	static User user;
 	static Twitter twitter;
@@ -81,7 +83,10 @@ public class Frame {
 		prevButton.setBounds(324, 339, 91, 21);
 		prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				imgPrev.setIcon(new ImageIcon(FileCheck.prevImageIcon().getImage().getScaledInstance(imgPrev.getWidth(),
+				imgPrev.setIcon(new ImageIcon(FileCheck
+						.prevImageIcon()
+						.getImage()
+						.getScaledInstance(imgPrev.getWidth(),
 								imgPrev.getHeight(), Image.SCALE_SMOOTH)));
 				maxCounts.setText(FileCheck.getLength() + "");
 				presentCounts.setText((FileCheck.getLength() - FileCheck.lastImg)
@@ -235,6 +240,10 @@ public class Frame {
 		bodyTextArea.setLineWrap(true);
 		frame.getContentPane().add(bodyTextArea);
 
+		tweetStatsLabel = new JLabel("aaaa");
+		tweetStatsLabel.setBounds(352, 416, 190, 21);
+		frame.getContentPane().add(tweetStatsLabel);
+
 		JLabel bodyLabel = new JLabel("本文");
 		bodyLabel.setBounds(12, 98, 50, 13);
 		frame.getContentPane().add(bodyLabel);
@@ -242,6 +251,10 @@ public class Frame {
 		JButton tweetButton = new JButton("つぶやく");
 		tweetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				tweetStatsLabel.setForeground(Color.BLACK);
+				tweetStatsLabel.setText("送信中です・・・");
+				
 				StatusUpdate statusUpdate = new StatusUpdate(bodyTextArea
 						.getText() + " " + tagsTextArer.getText());
 
@@ -254,7 +267,9 @@ public class Frame {
 				g.drawImage(instImg, 0, 0, null);
 
 				File resizedImg;
+
 				try {
+
 					resizedImg = File.createTempFile("temp", ".jpg");
 					ImageIO.write(thmb, "JPG", resizedImg);
 
@@ -266,13 +281,17 @@ public class Frame {
 
 				try {
 					Status status = twitter.updateStatus(statusUpdate);
+
+					tweetStatsLabel.setForeground(Color.BLUE);
+					tweetStatsLabel.setText("ツイートに成功しました！");
 				} catch (TwitterException e1) {
-					// TODO 自動生成された catch ブロック
+					tweetStatsLabel.setForeground(Color.RED);
+					tweetStatsLabel.setText("ツイートに失敗しました・・・");
 					e1.printStackTrace();
 				}
 			}
 		});
-		tweetButton.setBounds(551, 402, 118, 36);
+		tweetButton.setBounds(551, 401, 118, 36);
 		frame.getContentPane().add(tweetButton);
 
 		JLabel tagsLabel = new JLabel("ハッシュタグ");

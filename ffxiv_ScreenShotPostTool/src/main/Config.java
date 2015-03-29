@@ -99,6 +99,7 @@ public class Config {
 	public static void setPath(String path) {
 
 		conf.put(KEY_SAVING_DIRECTORY_PATH, path);
+		System.out.println("[DEBUG] " + path);
 	}
 
 	public static void setAccessToken(String token) {
