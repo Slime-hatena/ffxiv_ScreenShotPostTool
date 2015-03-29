@@ -1,21 +1,10 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,22 +13,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import twitter4j.Status;
-import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 public class Frame {
-	private JTextField tagsTextArer;
-	private JTextField textField;
-	private JTextArea bodyTextArea;
+	static JTextField tagsTextArer;
+	static JTextField textField;
+	static JTextArea bodyTextArea;
 	private JLabel maxCounts;
 	private JLabel presentCounts;
-	private JLabel tweetStatsLabel;
+	static JLabel tweetStatsLabel;
 	static JLabel lblaccountName;
 	static User user;
 	static Twitter twitter;
@@ -141,31 +126,7 @@ public class Frame {
 		oAtuhButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				twitter = TwitterFactory.getSingleton();
-				// Twitterオブジェクト作成
-
-				try {
-					requestToken = twitter.getOAuthRequestToken();
-				} catch (TwitterException e2) {
-					// TODO 自動生成された catch ブロック
-					e2.printStackTrace();
-				}
-				// リクエストトークン作成
-
-				// アクセストークン作成
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						System.in));
-				// 読み込み準備
-
-				Desktop desktop = Desktop.getDesktop();
-				try {
-					desktop.browse(new URI(requestToken.getAuthorizationURL()));
-				} catch (IOException | URISyntaxException e2) {
-					// TODO 自動生成された catch ブロック
-					e2.printStackTrace();
-				}
-
-				// URLの表示
+				RelativeTwitter.OAuthIssue();
 
 			}
 		});
@@ -189,31 +150,7 @@ public class Frame {
 		oAtuhButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				pin = textField.getText();
-
-				// PINの読み込み
-				try {
-					accessToken = twitter
-							.getOAuthAccessToken(requestToken, pin);
-
-					user = twitter.verifyCredentials();
-
-					accessToken = twitter
-							.getOAuthAccessToken(requestToken, pin);
-					Config.setAccessToken(accessToken.getToken());
-
-					user = twitter.verifyCredentials();
-
-					Config.setAccessToken(accessToken.getToken());
-					Config.setTokenSecret(accessToken.getTokenSecret());
-					Config.save();
-
-				} catch (TwitterException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-				}
-
-				lblaccountName.setText("ログイン中 : @" + user.getScreenName());
+				RelativeTwitter.OAuthCertification();
 
 			}
 
@@ -251,44 +188,10 @@ public class Frame {
 		JButton tweetButton = new JButton("つぶやく");
 		tweetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				tweetStatsLabel.setForeground(Color.BLACK);
-				tweetStatsLabel.setText("送信中です・・・");
-				
-				StatusUpdate statusUpdate = new StatusUpdate(bodyTextArea
-						.getText() + " " + tagsTextArer.getText());
 
-				ImageIcon postimg = new ImageIcon(FileCheck.selectedImg()
-						.getPath());
-				Image instImg = postimg.getImage();
-				BufferedImage thmb = new BufferedImage(instImg.getWidth(null),
-						instImg.getHeight(null), BufferedImage.TYPE_INT_RGB);
-				Graphics g = thmb.getGraphics();
-				g.drawImage(instImg, 0, 0, null);
+		RelativeTwitter.tweet();
 
-				File resizedImg;
 
-				try {
-
-					resizedImg = File.createTempFile("temp", ".jpg");
-					ImageIO.write(thmb, "JPG", resizedImg);
-
-					statusUpdate.setMedia(resizedImg);
-				} catch (IOException e2) {
-					// TODO 自動生成された catch ブロック
-					e2.printStackTrace();
-				}
-
-				try {
-					Status status = twitter.updateStatus(statusUpdate);
-
-					tweetStatsLabel.setForeground(Color.BLUE);
-					tweetStatsLabel.setText("ツイートに成功しました！");
-				} catch (TwitterException e1) {
-					tweetStatsLabel.setForeground(Color.RED);
-					tweetStatsLabel.setText("ツイートに失敗しました・・・");
-					e1.printStackTrace();
-				}
 			}
 		});
 		tweetButton.setBounds(551, 401, 118, 36);

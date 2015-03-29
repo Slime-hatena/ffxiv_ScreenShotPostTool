@@ -21,9 +21,9 @@ public class Config {
 	public static final String KEY_ACCESSTOKEN = "AccessToken";
 	public static final String KEY_TOKENSECRET = "TokenSecret";
 
-	public static void load() {
+	public static void load() { // ini生成
 
-		if (!new File("./ffxiv_sspt.ini").exists()) {
+		if (!new File("./ffxiv_sspt.ini").exists()) { // iniがなければ
 
 			gen();
 
@@ -38,8 +38,6 @@ public class Config {
 				String key = s.split("=")[0];
 				String val = s.split("=")[1];
 				conf.put(key, val);
-
-				System.out.println("[DEBUG] " + key + "=" + val);
 
 			}
 
@@ -66,16 +64,20 @@ public class Config {
 
 	public static void save() {
 
-		try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("./ffxiv_sspt.ini"))))) {
-			out.write("SavingDirectoryPath=" + conf.get(KEY_SAVING_DIRECTORY_PATH) + "\n");// 保存先デフォ
+		try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(new File("./ffxiv_sspt.ini"))))) {
+			out.write("SavingDirectoryPath="
+					+ conf.get(KEY_SAVING_DIRECTORY_PATH) + "\n");// 保存先デフォ
 			out.write("AccessToken=" + conf.get(KEY_ACCESSTOKEN) + "\n");// アクセストークン
-			out.write("TokenSecret=" + conf.get(KEY_TOKENSECRET) + "\n");//トークンシークレット
+			out.write("TokenSecret=" + conf.get(KEY_TOKENSECRET) + "\n");// トークンシークレット
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+
+	// 以下iniからロード/セーブ処理
 
 	public static String getPath() {
 
