@@ -15,8 +15,9 @@ public class Chooser {
 
 		int selected = filepath_chooser.showOpenDialog(parent);
 		if (selected == JFileChooser.APPROVE_OPTION) {
-			System.out.println(filepath_chooser.getSelectedFile() + "");
+
 			Config.setPath(filepath_chooser.getSelectedFile() + "");
+			Config.save();
 			return filepath_chooser.getSelectedFile();
 
 		}

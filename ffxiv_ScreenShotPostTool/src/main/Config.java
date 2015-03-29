@@ -66,10 +66,8 @@ public class Config {
 
 	public static void save() {
 
-		try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(new File("./ffxiv_sspt.ini"))))) {
-			out.write("SavingDirectoryPath="
-					+ conf.get(KEY_SAVING_DIRECTORY_PATH) + "\n");// 保存先デフォ
+		try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("./ffxiv_sspt.ini"))))) {
+			out.write("SavingDirectoryPath=" + conf.get(KEY_SAVING_DIRECTORY_PATH) + "\n");// 保存先デフォ
 			out.write("AccessToken=" + conf.get(KEY_ACCESSTOKEN) + "\n");// アクセストークン
 			out.write("TokenSecret=" + conf.get(KEY_TOKENSECRET) + "\n");//トークンシークレット
 
