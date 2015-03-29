@@ -71,7 +71,7 @@ public class Config {
 			out.write("SavingDirectoryPath="
 					+ conf.get(KEY_SAVING_DIRECTORY_PATH) + "\n");// 保存先デフォ
 			out.write("AccessToken=" + conf.get(KEY_ACCESSTOKEN) + "\n");// アクセストークン
-			out.write("TokenSecret=" + conf.get(KEY_TOKENSECRET) + "\n");//
+			out.write("TokenSecret=" + conf.get(KEY_TOKENSECRET) + "\n");//トークンシークレット
 
 		} catch (IOException e) {
 			e.printStackTrace();
