@@ -171,14 +171,14 @@ public class Frame {
 		frame.getContentPane().add(selectionPath);
 
 		bodyTextArea = new JTextArea();
-		bodyTextArea.setText("");
+		bodyTextArea.setText("ツイートに失敗しました・・・再起動してください。");
 		bodyTextArea.setColumns(10);
 		bodyTextArea.setBounds(22, 120, 280, 81);
 		bodyTextArea.setLineWrap(true);
 		frame.getContentPane().add(bodyTextArea);
 
-		tweetStatsLabel = new JLabel("aaaa");
-		tweetStatsLabel.setBounds(352, 416, 190, 21);
+		tweetStatsLabel = new JLabel("");
+		tweetStatsLabel.setBounds(286, 419, 262, 21);
 		frame.getContentPane().add(tweetStatsLabel);
 
 		JLabel bodyLabel = new JLabel("本文");

@@ -24,8 +24,8 @@ public class RelativeTwitter {
 
 	public static void tweet() {
 
-		Frame.tweetStatsLabel.setForeground(Color.BLACK);
-		Frame.tweetStatsLabel.setText("送信中です・・・");
+		Frame.tweetStatsLabel.setForeground(Color.red);
+		Frame.tweetStatsLabel.setText("ツイートに失敗しました・・・再起動してください。");
 
 		StatusUpdate statusUpdate = new StatusUpdate(Frame.bodyTextArea
 				.getText() + " " + Frame.tagsTextArer.getText());
