@@ -15,7 +15,6 @@ import java.net.URISyntaxException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -27,11 +26,11 @@ public class RelativeTwitter {
 		Frame.tweetStatsLabel.setForeground(Color.red);
 		Frame.tweetStatsLabel.setText("ツイートに失敗しました・・・再起動してください。");
 
-		StatusUpdate statusUpdate = new StatusUpdate(Frame.bodyTextArea
-				.getText() + " " + Frame.tagsTextArer.getText());
+		StatusUpdate statusUpdate = new StatusUpdate(
+				Frame.bodyTextArea.getText() + " "
+						+ Frame.tagsTextArer.getText());
 
-		ImageIcon postimg = new ImageIcon(FileCheck.selectedImg()
-				.getPath());
+		ImageIcon postimg = new ImageIcon(FileCheck.selectedImg().getPath());
 		Image instImg = postimg.getImage();
 		BufferedImage thmb = new BufferedImage(instImg.getWidth(null),
 				instImg.getHeight(null), BufferedImage.TYPE_INT_RGB);
@@ -47,38 +46,35 @@ public class RelativeTwitter {
 
 			statusUpdate.setMedia(resizedImg);
 		} catch (IOException e2) {
-			// TODO 自動生成された catch ブロック
 			e2.printStackTrace();
 		}
 
 		try {
-			Status status = Frame.twitter.updateStatus(statusUpdate);
+			Frame.twitter.updateStatus(statusUpdate);
 
 			Frame.tweetStatsLabel.setForeground(Color.BLUE);
 			Frame.tweetStatsLabel.setText("ツイートに成功しました！");
 		} catch (TwitterException e1) {
 			Frame.tweetStatsLabel.setForeground(Color.RED);
-			Frame.tweetStatsLabel.setText("ツイートに失敗しました・・・");
+			Frame.tweetStatsLabel.setText("ツイートに失敗しました・・・再起動してください。");
 			e1.printStackTrace();
 		}
 
 	}
 
-
-
-	public static void OAuthCertification(){
+	public static void OAuthCertification() {
 
 		Frame.pin = Frame.textField.getText();
 
 		// PINの読み込み
 		try {
-			Frame.accessToken = Frame.twitter
-					.getOAuthAccessToken(Frame.requestToken, Frame.pin);
+			Frame.accessToken = Frame.twitter.getOAuthAccessToken(
+					Frame.requestToken, Frame.pin);
 
 			Frame.user = Frame.twitter.verifyCredentials();
 
-			Frame.accessToken = Frame.twitter
-					.getOAuthAccessToken(Frame.requestToken, Frame.pin);
+			Frame.accessToken = Frame.twitter.getOAuthAccessToken(
+					Frame.requestToken, Frame.pin);
 			Config.setAccessToken(Frame.accessToken.getToken());
 
 			Frame.user = Frame.twitter.verifyCredentials();
@@ -87,19 +83,16 @@ public class RelativeTwitter {
 			Config.setTokenSecret(Frame.accessToken.getTokenSecret());
 			Config.save();
 
-
 		} catch (TwitterException e1) {
-			// TODO 自動生成された catch ブロック
+
 			e1.printStackTrace();
 		}
 
 		Frame.lblaccountName.setText("ログイン中 : @" + Frame.user.getScreenName());
 
-
 	}
 
 	public static void OAuthIssue() {
-
 
 		Frame.twitter = TwitterFactory.getSingleton();
 		// Twitterオブジェクト作成
@@ -107,24 +100,20 @@ public class RelativeTwitter {
 		try {
 			Frame.requestToken = Frame.twitter.getOAuthRequestToken();
 		} catch (TwitterException e2) {
-			// TODO 自動生成された catch ブロック
 			e2.printStackTrace();
 		}
 		// リクエストトークン作成
 
 		// アクセストークン作成
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				System.in));
+		new BufferedReader(new InputStreamReader(System.in));
 		// 読み込み準備
 
 		Desktop desktop = Desktop.getDesktop();
 		try {
 			desktop.browse(new URI(Frame.requestToken.getAuthorizationURL()));
 		} catch (IOException | URISyntaxException e2) {
-			// TODO 自動生成された catch ブロック
 			e2.printStackTrace();
 		}
-
 
 	}
 

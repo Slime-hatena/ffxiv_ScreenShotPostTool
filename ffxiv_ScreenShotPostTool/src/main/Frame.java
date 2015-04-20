@@ -171,7 +171,6 @@ public class Frame {
 		frame.getContentPane().add(selectionPath);
 
 		bodyTextArea = new JTextArea();
-		bodyTextArea.setText("ツイートに失敗しました・・・再起動してください。");
 		bodyTextArea.setColumns(10);
 		bodyTextArea.setBounds(22, 120, 280, 81);
 		bodyTextArea.setLineWrap(true);
@@ -228,9 +227,5 @@ public class Frame {
 		frame.setSize(700, 500);
 		frame.setVisible(true);
 
-	}
-
-	private AccessToken loadAccessToken(int parseInt) {
-		return null;
 	}
 }
