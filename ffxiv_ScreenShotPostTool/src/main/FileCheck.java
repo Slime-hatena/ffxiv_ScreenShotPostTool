@@ -7,6 +7,16 @@ import java.util.Collections;
 
 import javax.swing.ImageIcon;
 
+/**
+ *
+ *  Copyright (c) 2015 Slime_hatena
+ *  FFXIV Screen Shot Post Tool by Slime_hatena is licensed
+ *    under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *    http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *    Created on: 2015/05/08
+ */
+
+
 public class FileCheck {
 
 	public static int lastImg = 0;

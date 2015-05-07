@@ -19,6 +19,14 @@ import twitter4j.StatusUpdate;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
+/**
+ *  Copyright (c) 2015 Slime_hatena
+ *  FFXIV Screen Shot Post Tool by Slime_hatena is licensed
+ *    under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *    http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *    Created on: 2015/05/08
+ */
+
 public class RelativeTwitter {
 
 	public static void tweet() {

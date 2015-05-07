@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +19,16 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+/**
+ *
+ *  Copyright (c) 2015 Slime_hatena
+ *  FFXIV Screen Shot Post Tool by Slime_hatena is licensed
+ *    under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *    http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *    Created on: 2015/05/08
+ */
+
+
 public class Frame {
 	static JTextField tagsTextArer;
 	static JTextField textField;
@@ -32,13 +43,21 @@ public class Frame {
 	static RequestToken requestToken = null;
 	static AccessToken accessToken = null;
 
+
+
 	public Frame() {
 
 		JFrame frame = new JFrame("FFXIV ScreenShotPostTool");
+
 		frame.getContentPane().setLayout(null);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage("icon.png");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Slime_hatena\\git\\ffxiv_ScreenShotPostTool\\ffxiv_ScreenShotPostTool\\bin\\main\\icon.png"));
+		frame.setLocationByPlatform(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setSize(700, 500);
+		frame.setSize(250, 492);
+
 		frame.setVisible(true);
 
 		JLabel imgPrev = new JLabel();
@@ -49,18 +68,18 @@ public class Frame {
 		JTextArea pathTextArea = new JTextArea();
 		pathTextArea.setEditable(false);
 		pathTextArea.setEnabled(false);
-		pathTextArea.setBounds(125, 33, 544, 56);
+		pathTextArea.setBounds(115, 33, 187, 57);
 		pathTextArea.setText((FileCheck.getPath()));
 		frame.getContentPane().add(pathTextArea);
 		pathTextArea.setLineWrap(true);
 
-		JLabel infoLabel1 = new JLabel("スクリーンショットの有るファイルパスを選択");
+		JLabel infoLabel1 = new JLabel("スクリーンショットの有るフォルダを選択");
 		infoLabel1.setBounds(12, 10, 377, 13);
 		frame.getContentPane().add(infoLabel1);
 
 		tagsTextArer = new JTextField();
-		tagsTextArer.setBounds(22, 234, 280, 19);
-		tagsTextArer.setText("#FF14 #FFXIV");
+		tagsTextArer.setBounds(78, 157, 224, 19);
+		tagsTextArer.setText("#FF14share #FF14");
 		frame.getContentPane().add(tagsTextArer);
 		tagsTextArer.setColumns(10);
 
@@ -167,12 +186,12 @@ public class Frame {
 
 			}
 		});
-		selectionPath.setBounds(22, 34, 91, 21);
+		selectionPath.setBounds(12, 34, 91, 21);
 		frame.getContentPane().add(selectionPath);
 
 		bodyTextArea = new JTextArea();
 		bodyTextArea.setColumns(10);
-		bodyTextArea.setBounds(22, 120, 280, 81);
+		bodyTextArea.setBounds(22, 100, 280, 50);
 		bodyTextArea.setLineWrap(true);
 		frame.getContentPane().add(bodyTextArea);
 
@@ -181,15 +200,14 @@ public class Frame {
 		frame.getContentPane().add(tweetStatsLabel);
 
 		JLabel bodyLabel = new JLabel("本文");
-		bodyLabel.setBounds(12, 98, 50, 13);
+		bodyLabel.setBounds(12, 82, 50, 13);
 		frame.getContentPane().add(bodyLabel);
 
 		JButton tweetButton = new JButton("つぶやく");
 		tweetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		RelativeTwitter.tweet();
-
+				RelativeTwitter.tweet();
 
 			}
 		});
@@ -197,7 +215,7 @@ public class Frame {
 		frame.getContentPane().add(tweetButton);
 
 		JLabel tagsLabel = new JLabel("ハッシュタグ");
-		tagsLabel.setBounds(12, 211, 137, 13);
+		tagsLabel.setBounds(12, 160, 137, 13);
 		frame.getContentPane().add(tagsLabel);
 
 		presentCounts = new JLabel("");
@@ -219,6 +237,13 @@ public class Frame {
 		frame.getContentPane().add(qtyLabel);
 
 		JButton helpButton = new JButton("?");
+		helpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Help.main(null);
+
+			}
+		});
 		helpButton.setBounds(657, 2, 37, 21);
 		frame.getContentPane().add(helpButton);
 

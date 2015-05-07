@@ -13,6 +13,16 @@ import java.util.HashMap;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
+/**
+ *
+ *  Copyright (c) 2015 Slime_hatena
+ *  FFXIV Screen Shot Post Tool by Slime_hatena is licensed
+ *    under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ *    http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *    Created on: 2015/05/08
+ */
+
+
 public class Config {
 
 	private static HashMap<String, String> conf = new HashMap<>();
