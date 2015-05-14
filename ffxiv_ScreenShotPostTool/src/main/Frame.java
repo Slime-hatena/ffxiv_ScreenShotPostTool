@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
@@ -45,7 +46,7 @@ public class Frame {
 	private JLabel maxCounts;
 	private JLabel presentCounts;
 	static JLabel tweetStatsLabel;
-	static JLabel lblaccountName;
+	static JLabel qtyLabel = new JLabel("");
 	static User user;
 	static Twitter twitter;
 	static String pin = null;
@@ -55,7 +56,7 @@ public class Frame {
 
 
 	public Frame() {
-		
+
 		try {
 			UIManager.setLookAndFeel(NimbusLookAndFeel.class.getName());
 		} catch (ClassNotFoundException | InstantiationException
@@ -68,28 +69,27 @@ public class Frame {
 		frmScreenshotposttool.setTitle("ScreenShotPostTool");
 
 		frmScreenshotposttool.getContentPane().setLayout(null);
-		Toolkit tk = Toolkit.getDefaultToolkit();
 		frmScreenshotposttool.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Slime_hatena\\git\\ffxiv_ScreenShotPostTool\\ffxiv_ScreenShotPostTool\\bin\\main\\icon.png"));
 		frmScreenshotposttool.setLocationByPlatform(true);
 		frmScreenshotposttool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmScreenshotposttool.setResizable(false);
-		frmScreenshotposttool.setSize(300, 500);
+		frmScreenshotposttool.setSize(300, 400);
 
 		frmScreenshotposttool.setVisible(true);
 
 		JLabel imgPrev = new JLabel();
-		imgPrev.setBounds(12, 186, 274, 132);
+		imgPrev.setBounds(9, 108, 274, 132);
 
 		frmScreenshotposttool.getContentPane().add(imgPrev);
 
 		tagsTextArer = new JTextField();
-		tagsTextArer.setBounds(56, 157, 230, 30);
+		tagsTextArer.setBounds(31, 77, 255, 21);
 		tagsTextArer.setText("#FF14share #FF14");
 		frmScreenshotposttool.getContentPane().add(tagsTextArer);
 		tagsTextArer.setColumns(10);
 
 		JButton prevButton = new JButton("<<");
-		prevButton.setBounds(12, 328, 73, 21);
+		prevButton.setBounds(12, 246, 73, 21);
 		prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				imgPrev.setIcon(new ImageIcon(FileCheck
@@ -118,13 +118,14 @@ public class Frame {
 						+ "");
 			}
 		});
-		nextButton.setBounds(213, 328, 73, 21);
+		nextButton.setBounds(213, 246, 73, 21);
 		frmScreenshotposttool.getContentPane().add(nextButton);
 
 		JButton latestButton = new JButton("最新");
 		latestButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				qtyLabel.setText("/");
 				imgPrev.setIcon(new ImageIcon(FileCheck
 						.latestImageIcon()
 						.getImage()
@@ -135,79 +136,63 @@ public class Frame {
 						+ "");
 			}
 		});
-		latestButton.setBounds(97, 328, 104, 21);
+		latestButton.setBounds(96, 246, 104, 21);
 		frmScreenshotposttool.getContentPane().add(latestButton);
-
-		lblaccountName = new JLabel("");
-		lblaccountName.setBounds(12, 448, 400, 13);
-		frmScreenshotposttool.getContentPane().add(lblaccountName);
 
 		bodyTextArea = new JTextArea();
 		bodyTextArea.setColumns(10);
-		bodyTextArea.setBounds(12, 88, 274, 50);
+		bodyTextArea.setBounds(11, 17, 274, 50);
 		bodyTextArea.setLineWrap(true);
 		frmScreenshotposttool.getContentPane().add(bodyTextArea);
 
 		JLabel bodyLabel = new JLabel("本文");
-		bodyLabel.setBounds(23, 69, 50, 13);
+		bodyLabel.setBounds(5, 3, 50, 13);
 		frmScreenshotposttool.getContentPane().add(bodyLabel);
 
 		JButton tweetButton = new JButton("つぶやく");
 		tweetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				RelativeTwitter.tweet();
+				
+				
+				bodyTextArea.setText("");
 
 			}
 		});
-		tweetButton.setBounds(168, 402, 118, 36);
+		tweetButton.setBounds(168, 304, 118, 36);
 		frmScreenshotposttool.getContentPane().add(tweetButton);
 
 		JLabel tagsLabel = new JLabel("タグ");
-		tagsLabel.setBounds(12, 160, 32, 13);
+		tagsLabel.setBounds(5, 81, 32, 13);
 		frmScreenshotposttool.getContentPane().add(tagsLabel);
 
 		presentCounts = new JLabel("");
 		presentCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
 		presentCounts.setHorizontalAlignment(SwingConstants.RIGHT);
-		presentCounts.setBounds(12, 359, 125, 21);
+		presentCounts.setBounds(12, 277, 125, 21);
 		frmScreenshotposttool.getContentPane().add(presentCounts);
 
 		maxCounts = new JLabel("");
 		maxCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
 		maxCounts.setHorizontalAlignment(SwingConstants.LEFT);
-		maxCounts.setBounds(160, 359, 111, 21);
+		maxCounts.setBounds(158, 277, 111, 21);
 		frmScreenshotposttool.getContentPane().add(maxCounts);
 
-		JLabel qtyLabel = new JLabel("/");
+		
 		qtyLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		qtyLabel.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
-		qtyLabel.setBounds(135, 359, 19, 21);
+		qtyLabel.setBounds(134, 277, 19, 21);
 		frmScreenshotposttool.getContentPane().add(qtyLabel);
-
-										JLabel infoLabel1 = new JLabel("スクリーンショットの有るフォルダを選択");
-										infoLabel1.setBounds(12, 2, 274, 13);
-										frmScreenshotposttool.getContentPane().add(infoLabel1);
-
-												JButton selectionPath = new JButton("選択");
-												selectionPath.setBounds(12, 17, 84, 21);
-												frmScreenshotposttool.getContentPane().add(selectionPath);
-
-														JTextArea pathTextArea = new JTextArea();
-														pathTextArea.setBounds(108, 16, 178, 62);
-														frmScreenshotposttool.getContentPane().add(pathTextArea);
-														pathTextArea.setEditable(false);
-														pathTextArea.setEnabled(false);
-														pathTextArea.setText((FileCheck.getPath()));
-														pathTextArea.setLineWrap(true);
-						selectionPath.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-
-								FileCheck.setDir(new Chooser().choose(frmScreenshotposttool));
-								pathTextArea.setText(FileCheck.getPath());
-
-							}
-						});
+														
+														JLabel doUpdate = new JLabel("");
+														doUpdate.setBounds(9, 311, 154, 29);
+														frmScreenshotposttool.getContentPane().add(doUpdate);
+														doUpdate.setForeground(Color.BLUE);
+														
+														if (Start.doUpdate == true){
+															doUpdate.setText("アップデートがあります！");
+														}
 
 		frmScreenshotposttool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmScreenshotposttool.setResizable(false);
@@ -237,7 +222,7 @@ public class Frame {
 												JButton helpButton = new JButton("license");
 												mnNewMenu_1.add(helpButton);
 												helpButton.setFont(new Font("MS UI Gothic", Font.PLAIN, 12));
-												
+
 														tweetStatsLabel = new JLabel("");
 														menuBar.add(tweetStatsLabel);
 												helpButton.addActionListener(new ActionListener() {

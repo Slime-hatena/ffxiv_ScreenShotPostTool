@@ -96,8 +96,6 @@ public class RelativeTwitter {
 			e1.printStackTrace();
 		}
 
-		Frame.lblaccountName.setText("ログイン中 : @" + Frame.user.getScreenName());
-
 	}
 
 	public static void OAuthIssue() {
