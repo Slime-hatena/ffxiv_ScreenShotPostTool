@@ -39,7 +39,10 @@ import twitter4j.auth.RequestToken;
  */
 
 
+
+
 public class Frame {
+	static JFrame frmScreenshotposttool = new JFrame("FFXIV ScreenShotPostTool");
 	static JTextField tagsTextArer;
 	static JTextField textField;
 	static JTextArea bodyTextArea;
@@ -55,6 +58,8 @@ public class Frame {
 
 
 
+
+
 	public Frame() {
 
 		try {
@@ -65,31 +70,31 @@ public class Frame {
 			e1.printStackTrace();
 		}
 
-		JFrame frmScreenshotposttool = new JFrame("FFXIV ScreenShotPostTool");
-		frmScreenshotposttool.setTitle("ScreenShotPostTool");
+
+		frmScreenshotposttool.setTitle("ssPostTool");
 
 		frmScreenshotposttool.getContentPane().setLayout(null);
 		frmScreenshotposttool.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Slime_hatena\\git\\ffxiv_ScreenShotPostTool\\ffxiv_ScreenShotPostTool\\bin\\main\\icon.png"));
 		frmScreenshotposttool.setLocationByPlatform(true);
 		frmScreenshotposttool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmScreenshotposttool.setResizable(false);
-		frmScreenshotposttool.setSize(300, 400);
+		frmScreenshotposttool.setSize(210, 365);
 
 		frmScreenshotposttool.setVisible(true);
 
 		JLabel imgPrev = new JLabel();
-		imgPrev.setBounds(9, 108, 274, 132);
+		imgPrev.setBounds(5, 100, 190, 120);
 
 		frmScreenshotposttool.getContentPane().add(imgPrev);
 
 		tagsTextArer = new JTextField();
-		tagsTextArer.setBounds(31, 77, 255, 21);
+		tagsTextArer.setBounds(30, 75, 165, 21);
 		tagsTextArer.setText("#FF14share #FF14");
 		frmScreenshotposttool.getContentPane().add(tagsTextArer);
 		tagsTextArer.setColumns(10);
 
 		JButton prevButton = new JButton("<<");
-		prevButton.setBounds(12, 246, 73, 21);
+		prevButton.setBounds(5, 225, 50, 20);
 		prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				imgPrev.setIcon(new ImageIcon(FileCheck
@@ -100,6 +105,7 @@ public class Frame {
 				maxCounts.setText(FileCheck.getLength() + "");
 				presentCounts.setText((FileCheck.getLength() - FileCheck.lastImg)
 						+ "");
+				frmScreenshotposttool.setAlwaysOnTop(SetConfig.status);
 			}
 		});
 		frmScreenshotposttool.getContentPane().add(prevButton);
@@ -116,9 +122,10 @@ public class Frame {
 				maxCounts.setText(FileCheck.getLength() + "");
 				presentCounts.setText((FileCheck.getLength() - FileCheck.lastImg)
 						+ "");
+				frmScreenshotposttool.setAlwaysOnTop(SetConfig.status);
 			}
 		});
-		nextButton.setBounds(213, 246, 73, 21);
+		nextButton.setBounds(150, 225, 50, 20);
 		frmScreenshotposttool.getContentPane().add(nextButton);
 
 		JButton latestButton = new JButton("最新");
@@ -134,14 +141,17 @@ public class Frame {
 				maxCounts.setText(FileCheck.getLength() + "");
 				presentCounts.setText((FileCheck.getLength() - FileCheck.lastImg)
 						+ "");
+
+				frmScreenshotposttool.setAlwaysOnTop(SetConfig.status);
+
 			}
 		});
-		latestButton.setBounds(96, 246, 104, 21);
+		latestButton.setBounds(60, 225, 85, 20);
 		frmScreenshotposttool.getContentPane().add(latestButton);
 
 		bodyTextArea = new JTextArea();
 		bodyTextArea.setColumns(10);
-		bodyTextArea.setBounds(11, 17, 274, 50);
+		bodyTextArea.setBounds(10, 17, 185, 50);
 		bodyTextArea.setLineWrap(true);
 		frmScreenshotposttool.getContentPane().add(bodyTextArea);
 
@@ -152,44 +162,44 @@ public class Frame {
 		JButton tweetButton = new JButton("つぶやく");
 		tweetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				RelativeTwitter.tweet();
-				
-				
+
+
 				bodyTextArea.setText("");
 
 			}
 		});
-		tweetButton.setBounds(168, 304, 118, 36);
+		tweetButton.setBounds(112, 275, 85, 30);
 		frmScreenshotposttool.getContentPane().add(tweetButton);
 
 		JLabel tagsLabel = new JLabel("タグ");
-		tagsLabel.setBounds(5, 81, 32, 13);
+		tagsLabel.setBounds(5, 77, 32, 13);
 		frmScreenshotposttool.getContentPane().add(tagsLabel);
 
 		presentCounts = new JLabel("");
-		presentCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
+		presentCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 14));
 		presentCounts.setHorizontalAlignment(SwingConstants.RIGHT);
-		presentCounts.setBounds(12, 277, 125, 21);
+		presentCounts.setBounds(16, 248, 85, 21);
 		frmScreenshotposttool.getContentPane().add(presentCounts);
 
 		maxCounts = new JLabel("");
-		maxCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
+		maxCounts.setFont(new Font("MS UI Gothic", Font.PLAIN, 14));
 		maxCounts.setHorizontalAlignment(SwingConstants.LEFT);
-		maxCounts.setBounds(158, 277, 111, 21);
+		maxCounts.setBounds(112, 248, 90, 21);
 		frmScreenshotposttool.getContentPane().add(maxCounts);
 
-		
+
 		qtyLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		qtyLabel.setFont(new Font("MS UI Gothic", Font.PLAIN, 18));
-		qtyLabel.setBounds(134, 277, 19, 21);
+		qtyLabel.setFont(new Font("MS UI Gothic", Font.PLAIN, 16));
+		qtyLabel.setBounds(95, 248, 15, 21);
 		frmScreenshotposttool.getContentPane().add(qtyLabel);
-														
+
 														JLabel doUpdate = new JLabel("");
-														doUpdate.setBounds(9, 311, 154, 29);
+														doUpdate.setBounds(5, 191, 154, 29);
 														frmScreenshotposttool.getContentPane().add(doUpdate);
 														doUpdate.setForeground(Color.BLUE);
-														
+
 														if (Start.doUpdate == true){
 															doUpdate.setText("アップデートがあります！");
 														}
@@ -200,7 +210,7 @@ public class Frame {
 		JMenuBar menuBar = new JMenuBar();
 		frmScreenshotposttool.setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Twitter認証");
+		JMenu mnNewMenu = new JMenu("認証");
 		menuBar.add(mnNewMenu);
 
 				JButton oAtuhButton1 = new JButton("①Twitter認証ページを開く");
@@ -216,8 +226,17 @@ public class Frame {
 										JButton oAtuhButton2 = new JButton("③認証");
 										mnNewMenu.add(oAtuhButton2);
 
-										JMenu mnNewMenu_1 = new JMenu("ヘルプ");
+										JMenu mnNewMenu_1 = new JMenu("設定");
 										menuBar.add(mnNewMenu_1);
+
+												JButton button = new JButton("設定");
+												button.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+
+														SetConfig.main(null);
+													}
+												});
+												mnNewMenu_1.add(button);
 
 												JButton helpButton = new JButton("license");
 												mnNewMenu_1.add(helpButton);
@@ -270,4 +289,12 @@ public class Frame {
 
 		});
 	}
+
+
+
+
+
+
+
+
 }

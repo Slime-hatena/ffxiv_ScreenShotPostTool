@@ -9,13 +9,13 @@ package main;
 
 public class Start {
 	static int imgCount = 0;
-	static String SoftwereVersion = "020";
+	static String SoftwereVersion = "0.20";
 	static boolean doUpdate = true;
 
 	public static void main(String[] args) {
 
 		Config.load();
-		
+
 		UpdateChecker.main();
 
 		Config.accsesTokenLoad();
